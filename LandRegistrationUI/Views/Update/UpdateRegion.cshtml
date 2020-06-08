@@ -1,0 +1,29 @@
+﻿@model LandRegistrationUI.Models.RegionMaster
+@{
+    ViewBag.Title = "UpdateRegion";
+}
+<br />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">
+            Add Region
+        </h5>
+        <div class="card-body">
+            @using (Html.BeginForm("UpdateRegion", "Update", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-1">
+                        Region Name
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(Model => Model.Region, new { @required = "required", @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" value="Add" class="btn btn-primary"> Add</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

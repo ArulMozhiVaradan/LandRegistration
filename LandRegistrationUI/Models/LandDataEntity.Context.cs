@@ -13,10 +13,10 @@ namespace LandRegistrationUI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class LandDetailsEntities1 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public LandDetailsEntities1()
+            : base("name=LandDetailsEntities1")
         {
         }
     
