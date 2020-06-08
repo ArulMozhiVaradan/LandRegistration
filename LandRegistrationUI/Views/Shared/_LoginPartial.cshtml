@@ -6,8 +6,9 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item active navbar_menu">
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {@class="nav-link", title = "Manage" })
+        <li class="nav-item active navbar_menu"><a class="nav-link" href="@Url.Action("Index","LandDetail")">Search Land</a></li>
+        <li class="nav-item navbar_menu">
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
         </li>
         <li class="nav-item active navbar_menu"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
