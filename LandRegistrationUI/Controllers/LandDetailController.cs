@@ -13,5 +13,11 @@ namespace LandRegistrationUI.Controllers
         {
             return View();
         }
+
+        public ActionResult UserRecord()
+        {
+
+            return View();
+        }
     }
 }
