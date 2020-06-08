@@ -171,7 +171,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LandDetailController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UpdateController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,45 +178,45 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BlockMaster.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LandDetails.Context.cs">
+    <Compile Include="Models\LandDataEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LandDetails.Context.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LandDetails.cs">
+    <Compile Include="Models\LandDataEntity.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LandDetails.Designer.cs">
+    <Compile Include="Models\LandDataEntity.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LandDetails.edmx</DependentUpon>
+      <DependentUpon>LandDataEntity.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegionMaster.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RevenueVillageMaster.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TalukMaster.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserImage.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersData.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WardMaster.cs">
-      <DependentUpon>LandDetails.tt</DependentUpon>
+      <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -232,24 +231,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\LandDetails.Context.tt">
+    <Content Include="Models\LandDataEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LandDetails.edmx</DependentUpon>
-      <LastGenOutput>LandDetails.Context.cs</LastGenOutput>
+      <DependentUpon>LandDataEntity.edmx</DependentUpon>
+      <LastGenOutput>LandDataEntity.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\LandDetails.tt">
+    <Content Include="Models\LandDataEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LandDetails.edmx</DependentUpon>
-      <LastGenOutput>LandDetails.cs</LastGenOutput>
+      <DependentUpon>LandDataEntity.edmx</DependentUpon>
+      <LastGenOutput>LandDataEntity.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\LandDetails.edmx">
+    <EntityDeploy Include="Models\LandDataEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LandDetails.Designer.cs</LastGenOutput>
+      <LastGenOutput>LandDataEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\LandDetails.edmx.diagram">
-      <DependentUpon>LandDetails.edmx</DependentUpon>
+    <Content Include="Models\LandDataEntity.edmx.diagram">
+      <DependentUpon>LandDataEntity.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -296,12 +295,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\LandDetail\Index.cshtml" />
-    <Content Include="Views\LandDetail\UserRecord.cshtml" />
+    <Content Include="Views\Update\UpdateRegion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Update\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

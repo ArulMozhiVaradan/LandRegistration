@@ -460,7 +460,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LandDetailsEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="BlockMasters" EntityType="Self.BlockMaster" />
           <EntitySet Name="RegionMasters" EntityType="Self.RegionMaster" />
@@ -511,7 +511,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LandDetailsModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="LandDetailsModelStoreContainer" CdmEntityContainer="LandDetailsEntities1">
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="LandDetailsModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
