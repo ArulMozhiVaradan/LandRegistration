@@ -18,6 +18,8 @@ namespace LandRegistrationUI.Models
         public RevenueVillageMaster()
         {
             this.BlockMasters = new HashSet<BlockMaster>();
+            this.WardMasters = new HashSet<WardMaster>();
+            this.UsersDatas = new HashSet<UsersData>();
         }
     
         public int Id { get; set; }
@@ -28,6 +30,9 @@ namespace LandRegistrationUI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BlockMaster> BlockMasters { get; set; }
         public virtual TalukMaster TalukMaster { get; set; }
-        public virtual WardMaster WardMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WardMaster> WardMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsersData> UsersDatas { get; set; }
     }
 }

@@ -7,21 +7,21 @@
       <Diagram DiagramId="15b17a985dff44af810a3dc5d032cc8b" Name="Diagram1">
         <EntityTypeShape EntityType="LandDetailsModel.AspNetUser" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LandDetailsModel.BlockMaster" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LandDetailsModel.RegionMaster" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandDetailsModel.RegionMaster" PointX="0.75" PointY="4.125" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LandDetailsModel.RevenueVillageMaster" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LandDetailsModel.TalukMaster" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LandDetailsModel.UserImage" Width="1.5" PointX="12" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LandDetailsModel.UsersData" Width="1.5" PointX="9.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LandDetailsModel.WardMaster" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="LandDetailsModel.FK_BlockMaster_RevenueVillageMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_UsersData_BlockMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_TalukMaster_RegionMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_UsersData_UsersData" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="LandDetailsModel.FK_TalukMaster_RegionMaster" />
         <AssociationConnector Association="LandDetailsModel.FK_RevenueVillageMaster_TalukMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_WardMaster_RevenueVillageMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_UsersData_TalukMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_UserImages_UsersData" ManuallyRouted="false" />
-        <AssociationConnector Association="LandDetailsModel.FK_UsersData_WardMaster" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LandDetailsModel.WardMaster" Width="1.5" PointX="7.5" PointY="6.125" />
+        <AssociationConnector Association="LandDetailsModel.FK_WardMaster_RevenueVillageMaster1" />
+        <EntityTypeShape EntityType="LandDetailsModel.UsersData" Width="1.5" PointX="9.75" PointY="2" />
+        <AssociationConnector Association="LandDetailsModel.FK_UsersData_BlockMaster" />
+        <AssociationConnector Association="LandDetailsModel.FK_UsersData_UsersData" />
+        <AssociationConnector Association="LandDetailsModel.FK_UsersData_RevenueVillageMaster" />
+        <AssociationConnector Association="LandDetailsModel.FK_UsersData_TalukMaster" />
+        <AssociationConnector Association="LandDetailsModel.FK_UserImages_UsersData" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

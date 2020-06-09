@@ -1,0 +1,251 @@
+﻿@model LandRegistrationUI.Models.UsersData
+@{
+    ViewBag.Title = "UserDetails";
+}
+
+<style>
+    .label_text {
+        font-size: 16px;
+        padding-top: 5px;
+        font-weight: 500;
+    }
+
+    .custom_checkbox {
+        display: inline-block;
+        margin: 5px 15px;
+    }
+
+    .image_row {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 4px;
+    }
+
+    /* Create four equal columns that sits next to each other */
+    .image_column {
+        flex: 25%;
+        max-width: 25%;
+        padding: 0 4px;
+    }
+
+        .image_column img {
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+</style>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="text-center">User Data</h4>
+        </div>
+    </div>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Region</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.RegionMaster.Region, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Taluk</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.TalukMaster.TalukName, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Revenue/Village</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.RevenueVillageMaster.RevenueVillageName, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">LGR</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.PattaNo, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">T.S.No</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.TSNo, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">R.S.No</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.RSNo, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            @if (Model.RevenueVillageMaster.IsWard == true)
+            {
+                <div class="col-12 col-sm-6">
+                    <div class="row">
+                        <div class="col-3 label_text">Ward</div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(Model => Model.WardID, new { @readonly = "readonly", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-12 col-sm-6">
+                    <div class="row">
+                        <div class="col-3 label_text">Block</div>
+                        <div class="col-9">
+                            @Html.TextBoxFor(Model => Model.BlockMaster.BlockName, new { @readonly = "readonly", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-3 col-md-2 label_text">Sub-division</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox custom_checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                <label class="custom-control-label" for="customCheck1">Sub-division 1</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom_checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+                                <label class="custom-control-label" for="customCheck2">Sub-division 2</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom_checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck3" checked="">
+                                <label class="custom-control-label" for="customCheck3">Sub-division 3</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Owner Name</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.OwnerName, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Tenant Name</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.TenantName, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Address</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.AddressLine1, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text"></div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.AddressLine2, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Address</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.AddressLine3, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-1 label_text">Remarks</div>
+            <div class="col-9">
+                @Html.TextAreaFor(Model => Model.Remarks, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center">User Images</h4>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row image_row">
+                    <div class="column image_column">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                    </div>
+                    <div class="column image_column">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                    </div>
+                    <div class="column image_column">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                        <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+

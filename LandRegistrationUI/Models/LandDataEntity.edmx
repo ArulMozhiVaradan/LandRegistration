@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LandDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LandDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -71,6 +71,7 @@
           <Property Name="TalukID" Type="int" Nullable="false" />
           <Property Name="WardID" Type="int" />
           <Property Name="BlockID" Type="int" />
+          <Property Name="RevenueVillageID" Type="int" Nullable="false" />
           <Property Name="TSNo" Type="nvarchar" MaxLength="50" />
           <Property Name="SubDivisionNo" Type="nvarchar" MaxLength="20" />
           <Property Name="RSNo" Type="nvarchar" MaxLength="50" />
@@ -150,6 +151,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UsersData_RevenueVillageMaster">
+          <End Role="RevenueVillageMaster" Type="Self.RevenueVillageMaster" Multiplicity="1" />
+          <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueVillageMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersData">
+              <PropertyRef Name="RevenueVillageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UsersData_TalukMaster">
           <End Role="TalukMaster" Type="Self.TalukMaster" Multiplicity="1" />
           <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
@@ -174,27 +187,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsersData_WardMaster">
-          <End Role="WardMaster" Type="Self.WardMaster" Multiplicity="0..1" />
-          <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WardMaster">
-              <PropertyRef Name="WardID" />
-            </Principal>
-            <Dependent Role="UsersData">
-              <PropertyRef Name="WardID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WardMaster_RevenueVillageMaster">
+        <Association Name="FK_WardMaster_RevenueVillageMaster1">
           <End Role="RevenueVillageMaster" Type="Self.RevenueVillageMaster" Multiplicity="1" />
-          <End Role="WardMaster" Type="Self.WardMaster" Multiplicity="0..1" />
+          <End Role="WardMaster" Type="Self.WardMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RevenueVillageMaster">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="WardMaster">
-              <PropertyRef Name="WardID" />
+              <PropertyRef Name="RevenueVillageID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -227,6 +228,10 @@
             <End Role="BlockMaster" EntitySet="BlockMaster" />
             <End Role="UsersData" EntitySet="UsersData" />
           </AssociationSet>
+          <AssociationSet Name="FK_UsersData_RevenueVillageMaster" Association="Self.FK_UsersData_RevenueVillageMaster">
+            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMaster" />
+            <End Role="UsersData" EntitySet="UsersData" />
+          </AssociationSet>
           <AssociationSet Name="FK_UsersData_TalukMaster" Association="Self.FK_UsersData_TalukMaster">
             <End Role="TalukMaster" EntitySet="TalukMaster" />
             <End Role="UsersData" EntitySet="UsersData" />
@@ -235,17 +240,12 @@
             <End Role="RegionMaster" EntitySet="RegionMaster" />
             <End Role="UsersData" EntitySet="UsersData" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsersData_WardMaster" Association="Self.FK_UsersData_WardMaster">
-            <End Role="WardMaster" EntitySet="WardMaster" />
-            <End Role="UsersData" EntitySet="UsersData" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WardMaster_RevenueVillageMaster" Association="Self.FK_WardMaster_RevenueVillageMaster">
+          <AssociationSet Name="FK_WardMaster_RevenueVillageMaster1" Association="Self.FK_WardMaster_RevenueVillageMaster1">
             <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMaster" />
             <End Role="WardMaster" EntitySet="WardMaster" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LandDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -274,16 +274,16 @@
           <Property Name="BlockName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RevenueVillageId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RevenueVillageMaster" Relationship="Self.FK_BlockMaster_RevenueVillageMaster" FromRole="BlockMaster" ToRole="RevenueVillageMaster" />
-          <NavigationProperty Name="UsersDatas" Relationship="Self.FK_UsersData_BlockMaster" FromRole="BlockMaster" ToRole="UsersData" />
+          <NavigationProperty Name="UsersDatas" Relationship="LandDetailsModel.FK_UsersData_BlockMaster" FromRole="BlockMaster" ToRole="UsersData" />
         </EntityType>
         <EntityType Name="RegionMaster">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Byte" />
+          <Property Name="Region" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="TalukMasters" Relationship="Self.FK_TalukMaster_RegionMaster" FromRole="RegionMaster" ToRole="TalukMaster" />
-          <NavigationProperty Name="UsersDatas" Relationship="Self.FK_UsersData_UsersData" FromRole="RegionMaster" ToRole="UsersData" />
+          <NavigationProperty Name="UsersDatas" Relationship="LandDetailsModel.FK_UsersData_UsersData" FromRole="RegionMaster" ToRole="UsersData" />
         </EntityType>
         <EntityType Name="RevenueVillageMaster">
           <Key>
@@ -295,7 +295,8 @@
           <Property Name="IsWard" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BlockMasters" Relationship="Self.FK_BlockMaster_RevenueVillageMaster" FromRole="RevenueVillageMaster" ToRole="BlockMaster" />
           <NavigationProperty Name="TalukMaster" Relationship="Self.FK_RevenueVillageMaster_TalukMaster" FromRole="RevenueVillageMaster" ToRole="TalukMaster" />
-          <NavigationProperty Name="WardMaster" Relationship="Self.FK_WardMaster_RevenueVillageMaster" FromRole="RevenueVillageMaster" ToRole="WardMaster" />
+          <NavigationProperty Name="WardMasters" Relationship="LandDetailsModel.FK_WardMaster_RevenueVillageMaster1" FromRole="RevenueVillageMaster" ToRole="WardMaster" />
+          <NavigationProperty Name="UsersDatas" Relationship="LandDetailsModel.FK_UsersData_RevenueVillageMaster" FromRole="RevenueVillageMaster" ToRole="UsersData" />
         </EntityType>
         <EntityType Name="TalukMaster">
           <Key>
@@ -306,7 +307,7 @@
           <Property Name="RegionID" Type="Byte" Nullable="false" />
           <NavigationProperty Name="RegionMaster" Relationship="Self.FK_TalukMaster_RegionMaster" FromRole="TalukMaster" ToRole="RegionMaster" />
           <NavigationProperty Name="RevenueVillageMasters" Relationship="Self.FK_RevenueVillageMaster_TalukMaster" FromRole="TalukMaster" ToRole="RevenueVillageMaster" />
-          <NavigationProperty Name="UsersDatas" Relationship="Self.FK_UsersData_TalukMaster" FromRole="TalukMaster" ToRole="UsersData" />
+          <NavigationProperty Name="UsersDatas" Relationship="LandDetailsModel.FK_UsersData_TalukMaster" FromRole="TalukMaster" ToRole="UsersData" />
         </EntityType>
         <EntityType Name="UserImage">
           <Key>
@@ -315,42 +316,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserDataID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UsersData" Relationship="Self.FK_UserImages_UsersData" FromRole="UserImages" ToRole="UsersData" />
-        </EntityType>
-        <EntityType Name="UsersData">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegionID" Type="Byte" Nullable="false" />
-          <Property Name="TalukID" Type="Int32" Nullable="false" />
-          <Property Name="WardID" Type="Int32" />
-          <Property Name="BlockID" Type="Int32" />
-          <Property Name="TSNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SubDivisionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RSNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PattaNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TenantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BlockMaster" Relationship="Self.FK_UsersData_BlockMaster" FromRole="UsersData" ToRole="BlockMaster" />
-          <NavigationProperty Name="RegionMaster" Relationship="Self.FK_UsersData_UsersData" FromRole="UsersData" ToRole="RegionMaster" />
-          <NavigationProperty Name="TalukMaster" Relationship="Self.FK_UsersData_TalukMaster" FromRole="UsersData" ToRole="TalukMaster" />
-          <NavigationProperty Name="UserImages" Relationship="Self.FK_UserImages_UsersData" FromRole="UsersData" ToRole="UserImages" />
-          <NavigationProperty Name="WardMaster" Relationship="Self.FK_UsersData_WardMaster" FromRole="UsersData" ToRole="WardMaster" />
-        </EntityType>
-        <EntityType Name="WardMaster">
-          <Key>
-            <PropertyRef Name="WardID" />
-          </Key>
-          <Property Name="WardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WardName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RevenueVillageID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RevenueVillageMaster" Relationship="Self.FK_WardMaster_RevenueVillageMaster" FromRole="WardMaster" ToRole="RevenueVillageMaster" />
-          <NavigationProperty Name="UsersDatas" Relationship="Self.FK_UsersData_WardMaster" FromRole="WardMaster" ToRole="UsersData" />
+          <NavigationProperty Name="UsersData" Relationship="LandDetailsModel.FK_UserImages_UsersData" FromRole="UserImage" ToRole="UsersData" />
         </EntityType>
         <Association Name="FK_BlockMaster_RevenueVillageMaster">
           <End Role="RevenueVillageMaster" Type="Self.RevenueVillageMaster" Multiplicity="1" />
@@ -364,38 +330,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsersData_BlockMaster">
-          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="0..1" />
-          <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BlockMaster">
-              <PropertyRef Name="BlockID" />
-            </Principal>
-            <Dependent Role="UsersData">
-              <PropertyRef Name="BlockID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TalukMaster_RegionMaster">
-          <End Role="RegionMaster" Type="Self.RegionMaster" Multiplicity="1" />
-          <End Role="TalukMaster" Type="Self.TalukMaster" Multiplicity="*" />
+          <End Type="Self.RegionMaster" Multiplicity="1" Role="RegionMaster" />
+          <End Type="Self.TalukMaster" Multiplicity="*" Role="TalukMaster" />
           <ReferentialConstraint>
             <Principal Role="RegionMaster">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TalukMaster">
-              <PropertyRef Name="RegionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsersData_UsersData">
-          <End Role="RegionMaster" Type="Self.RegionMaster" Multiplicity="1" />
-          <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegionMaster">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsersData">
               <PropertyRef Name="RegionID" />
             </Dependent>
           </ReferentialConstraint>
@@ -412,21 +354,138 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WardMaster_RevenueVillageMaster">
-          <End Role="RevenueVillageMaster" Type="Self.RevenueVillageMaster" Multiplicity="1" />
-          <End Role="WardMaster" Type="Self.WardMaster" Multiplicity="0..1" />
+        <EntityContainer Name="LandDetailsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="BlockMasters" EntityType="Self.BlockMaster" />
+          <EntitySet Name="RegionMasters" EntityType="Self.RegionMaster" />
+          <EntitySet Name="RevenueVillageMasters" EntityType="Self.RevenueVillageMaster" />
+          <EntitySet Name="TalukMasters" EntityType="Self.TalukMaster" />
+          <EntitySet Name="UserImages" EntityType="Self.UserImage" />
+          <AssociationSet Name="FK_BlockMaster_RevenueVillageMaster" Association="Self.FK_BlockMaster_RevenueVillageMaster">
+            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
+            <End Role="BlockMaster" EntitySet="BlockMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TalukMaster_RegionMaster" Association="Self.FK_TalukMaster_RegionMaster">
+            <End EntitySet="RegionMasters" Role="RegionMaster" />
+            <End EntitySet="TalukMasters" Role="TalukMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RevenueVillageMaster_TalukMaster" Association="Self.FK_RevenueVillageMaster_TalukMaster">
+            <End Role="TalukMaster" EntitySet="TalukMasters" />
+            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
+          </AssociationSet>
+          <EntitySet Name="WardMasters" EntityType="LandDetailsModel.WardMaster" />
+          <AssociationSet Name="FK_WardMaster_RevenueVillageMaster1" Association="LandDetailsModel.FK_WardMaster_RevenueVillageMaster1">
+            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
+            <End Role="WardMaster" EntitySet="WardMasters" />
+          </AssociationSet>
+          <EntitySet Name="UsersDatas" EntityType="LandDetailsModel.UsersData" />
+          <AssociationSet Name="FK_UsersData_BlockMaster" Association="LandDetailsModel.FK_UsersData_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMasters" />
+            <End Role="UsersData" EntitySet="UsersDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersData_UsersData" Association="LandDetailsModel.FK_UsersData_UsersData">
+            <End Role="RegionMaster" EntitySet="RegionMasters" />
+            <End Role="UsersData" EntitySet="UsersDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersData_RevenueVillageMaster" Association="LandDetailsModel.FK_UsersData_RevenueVillageMaster">
+            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
+            <End Role="UsersData" EntitySet="UsersDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersData_TalukMaster" Association="LandDetailsModel.FK_UsersData_TalukMaster">
+            <End Role="TalukMaster" EntitySet="TalukMasters" />
+            <End Role="UsersData" EntitySet="UsersDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserImages_UsersData" Association="LandDetailsModel.FK_UserImages_UsersData">
+            <End Role="UsersData" EntitySet="UsersDatas" />
+            <End Role="UserImage" EntitySet="UserImages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="WardMaster">
+          <Key>
+            <PropertyRef Name="WardID" />
+          </Key>
+          <Property Name="WardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WardName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RevenueVillageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RevenueVillageMaster" Relationship="LandDetailsModel.FK_WardMaster_RevenueVillageMaster1" FromRole="WardMaster" ToRole="RevenueVillageMaster" />
+        </EntityType>
+        <Association Name="FK_WardMaster_RevenueVillageMaster1">
+          <End Type="LandDetailsModel.RevenueVillageMaster" Role="RevenueVillageMaster" Multiplicity="1" />
+          <End Type="LandDetailsModel.WardMaster" Role="WardMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RevenueVillageMaster">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="WardMaster">
-              <PropertyRef Name="WardID" />
+              <PropertyRef Name="RevenueVillageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UsersData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionID" Type="Byte" Nullable="false" />
+          <Property Name="TalukID" Type="Int32" Nullable="false" />
+          <Property Name="WardID" Type="Int32" />
+          <Property Name="BlockID" Type="Int32" />
+          <Property Name="RevenueVillageID" Type="Int32" Nullable="false" />
+          <Property Name="TSNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubDivisionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RSNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PattaNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenantName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlockMaster" Relationship="LandDetailsModel.FK_UsersData_BlockMaster" FromRole="UsersData" ToRole="BlockMaster" />
+          <NavigationProperty Name="RegionMaster" Relationship="LandDetailsModel.FK_UsersData_UsersData" FromRole="UsersData" ToRole="RegionMaster" />
+          <NavigationProperty Name="RevenueVillageMaster" Relationship="LandDetailsModel.FK_UsersData_RevenueVillageMaster" FromRole="UsersData" ToRole="RevenueVillageMaster" />
+          <NavigationProperty Name="TalukMaster" Relationship="LandDetailsModel.FK_UsersData_TalukMaster" FromRole="UsersData" ToRole="TalukMaster" />
+          <NavigationProperty Name="UserImages" Relationship="LandDetailsModel.FK_UserImages_UsersData" FromRole="UsersData" ToRole="UserImage" />
+        </EntityType>
+        <Association Name="FK_UsersData_BlockMaster">
+          <End Type="LandDetailsModel.BlockMaster" Role="BlockMaster" Multiplicity="0..1" />
+          <End Type="LandDetailsModel.UsersData" Role="UsersData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="BlockID" />
+            </Principal>
+            <Dependent Role="UsersData">
+              <PropertyRef Name="BlockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersData_UsersData">
+          <End Type="LandDetailsModel.RegionMaster" Role="RegionMaster" Multiplicity="1" />
+          <End Type="LandDetailsModel.UsersData" Role="UsersData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersData">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersData_RevenueVillageMaster">
+          <End Type="LandDetailsModel.RevenueVillageMaster" Role="RevenueVillageMaster" Multiplicity="1" />
+          <End Type="LandDetailsModel.UsersData" Role="UsersData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueVillageMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersData">
+              <PropertyRef Name="RevenueVillageID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UsersData_TalukMaster">
-          <End Role="TalukMaster" Type="Self.TalukMaster" Multiplicity="1" />
-          <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
+          <End Type="LandDetailsModel.TalukMaster" Role="TalukMaster" Multiplicity="1" />
+          <End Type="LandDetailsModel.UsersData" Role="UsersData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TalukMaster">
               <PropertyRef Name="TalukID" />
@@ -437,75 +496,17 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserImages_UsersData">
-          <End Role="UsersData" Type="Self.UsersData" Multiplicity="1" />
-          <End Role="UserImages" Type="Self.UserImage" Multiplicity="*" />
+          <End Type="LandDetailsModel.UsersData" Role="UsersData" Multiplicity="1" />
+          <End Type="LandDetailsModel.UserImage" Role="UserImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UsersData">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserImages">
+            <Dependent Role="UserImage">
               <PropertyRef Name="UserDataID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsersData_WardMaster">
-          <End Role="WardMaster" Type="Self.WardMaster" Multiplicity="0..1" />
-          <End Role="UsersData" Type="Self.UsersData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WardMaster">
-              <PropertyRef Name="WardID" />
-            </Principal>
-            <Dependent Role="UsersData">
-              <PropertyRef Name="WardID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="LandDetailsEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="BlockMasters" EntityType="Self.BlockMaster" />
-          <EntitySet Name="RegionMasters" EntityType="Self.RegionMaster" />
-          <EntitySet Name="RevenueVillageMasters" EntityType="Self.RevenueVillageMaster" />
-          <EntitySet Name="TalukMasters" EntityType="Self.TalukMaster" />
-          <EntitySet Name="UserImages" EntityType="Self.UserImage" />
-          <EntitySet Name="UsersDatas" EntityType="Self.UsersData" />
-          <EntitySet Name="WardMasters" EntityType="Self.WardMaster" />
-          <AssociationSet Name="FK_BlockMaster_RevenueVillageMaster" Association="Self.FK_BlockMaster_RevenueVillageMaster">
-            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
-            <End Role="BlockMaster" EntitySet="BlockMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersData_BlockMaster" Association="Self.FK_UsersData_BlockMaster">
-            <End Role="BlockMaster" EntitySet="BlockMasters" />
-            <End Role="UsersData" EntitySet="UsersDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TalukMaster_RegionMaster" Association="Self.FK_TalukMaster_RegionMaster">
-            <End Role="RegionMaster" EntitySet="RegionMasters" />
-            <End Role="TalukMaster" EntitySet="TalukMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersData_UsersData" Association="Self.FK_UsersData_UsersData">
-            <End Role="RegionMaster" EntitySet="RegionMasters" />
-            <End Role="UsersData" EntitySet="UsersDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RevenueVillageMaster_TalukMaster" Association="Self.FK_RevenueVillageMaster_TalukMaster">
-            <End Role="TalukMaster" EntitySet="TalukMasters" />
-            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WardMaster_RevenueVillageMaster" Association="Self.FK_WardMaster_RevenueVillageMaster">
-            <End Role="RevenueVillageMaster" EntitySet="RevenueVillageMasters" />
-            <End Role="WardMaster" EntitySet="WardMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersData_TalukMaster" Association="Self.FK_UsersData_TalukMaster">
-            <End Role="TalukMaster" EntitySet="TalukMasters" />
-            <End Role="UsersData" EntitySet="UsersDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserImages_UsersData" Association="Self.FK_UserImages_UsersData">
-            <End Role="UsersData" EntitySet="UsersDatas" />
-            <End Role="UserImages" EntitySet="UserImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsersData_WardMaster" Association="Self.FK_UsersData_WardMaster">
-            <End Role="WardMaster" EntitySet="WardMasters" />
-            <End Role="UsersData" EntitySet="UsersDatas" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -575,33 +576,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UsersDatas">
-            <EntityTypeMapping TypeName="LandDetailsModel.UsersData">
-              <MappingFragment StoreEntitySet="UsersData">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="TalukID" ColumnName="TalukID" />
-                <ScalarProperty Name="WardID" ColumnName="WardID" />
-                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
-                <ScalarProperty Name="TSNo" ColumnName="TSNo" />
-                <ScalarProperty Name="SubDivisionNo" ColumnName="SubDivisionNo" />
-                <ScalarProperty Name="RSNo" ColumnName="RSNo" />
-                <ScalarProperty Name="PattaNo" ColumnName="PattaNo" />
-                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
-                <ScalarProperty Name="TenantName" ColumnName="TenantName" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WardMasters">
             <EntityTypeMapping TypeName="LandDetailsModel.WardMaster">
               <MappingFragment StoreEntitySet="WardMaster">
-                <ScalarProperty Name="WardID" ColumnName="WardID" />
-                <ScalarProperty Name="WardName" ColumnName="WardName" />
                 <ScalarProperty Name="RevenueVillageID" ColumnName="RevenueVillageID" />
+                <ScalarProperty Name="WardName" ColumnName="WardName" />
+                <ScalarProperty Name="WardID" ColumnName="WardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersDatas">
+            <EntityTypeMapping TypeName="LandDetailsModel.UsersData">
+              <MappingFragment StoreEntitySet="UsersData">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="TenantName" ColumnName="TenantName" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="PattaNo" ColumnName="PattaNo" />
+                <ScalarProperty Name="RSNo" ColumnName="RSNo" />
+                <ScalarProperty Name="SubDivisionNo" ColumnName="SubDivisionNo" />
+                <ScalarProperty Name="TSNo" ColumnName="TSNo" />
+                <ScalarProperty Name="RevenueVillageID" ColumnName="RevenueVillageID" />
+                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
+                <ScalarProperty Name="WardID" ColumnName="WardID" />
+                <ScalarProperty Name="TalukID" ColumnName="TalukID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

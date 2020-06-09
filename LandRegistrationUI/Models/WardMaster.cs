@@ -14,18 +14,10 @@ namespace LandRegistrationUI.Models
     
     public partial class WardMaster
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WardMaster()
-        {
-            this.UsersDatas = new HashSet<UsersData>();
-        }
-    
         public int WardID { get; set; }
         public string WardName { get; set; }
         public int RevenueVillageID { get; set; }
     
         public virtual RevenueVillageMaster RevenueVillageMaster { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersData> UsersDatas { get; set; }
     }
 }

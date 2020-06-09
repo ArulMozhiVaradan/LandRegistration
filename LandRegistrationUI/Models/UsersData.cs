@@ -25,6 +25,7 @@ namespace LandRegistrationUI.Models
         public int TalukID { get; set; }
         public Nullable<int> WardID { get; set; }
         public Nullable<int> BlockID { get; set; }
+        public int RevenueVillageID { get; set; }
         public string TSNo { get; set; }
         public string SubDivisionNo { get; set; }
         public string RSNo { get; set; }
@@ -38,9 +39,9 @@ namespace LandRegistrationUI.Models
     
         public virtual BlockMaster BlockMaster { get; set; }
         public virtual RegionMaster RegionMaster { get; set; }
+        public virtual RevenueVillageMaster RevenueVillageMaster { get; set; }
         public virtual TalukMaster TalukMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserImage> UserImages { get; set; }
-        public virtual WardMaster WardMaster { get; set; }
     }
 }

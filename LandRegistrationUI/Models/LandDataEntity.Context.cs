@@ -31,7 +31,7 @@ namespace LandRegistrationUI.Models
         public virtual DbSet<RevenueVillageMaster> RevenueVillageMasters { get; set; }
         public virtual DbSet<TalukMaster> TalukMasters { get; set; }
         public virtual DbSet<UserImage> UserImages { get; set; }
-        public virtual DbSet<UsersData> UsersDatas { get; set; }
         public virtual DbSet<WardMaster> WardMasters { get; set; }
+        public virtual DbSet<UsersData> UsersDatas { get; set; }
     }
 }

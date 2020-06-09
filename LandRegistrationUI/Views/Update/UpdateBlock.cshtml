@@ -1,0 +1,43 @@
+﻿@model LandRegistrationUI.Models.BlockMaster
+@{
+    ViewBag.Title = "UpdateBlock";
+}
+
+<br />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">
+            Add Block
+        </h5>
+        <div class="card-body">
+            @using (Html.BeginForm("UpdateBlock", "Update", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-1">
+                        Block Name
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(Model => Model.BlockName, new { @required = "required", @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        Select Village
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.RevenueVillageId, ViewBag.regionList as IEnumerable<SelectListItem>, "Please Select", new { @class = "btn form-control btn-secondary dropdown-toggle" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 text-center">
+                        <button type="submit" value="Add" class="btn btn-primary"> Add</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
