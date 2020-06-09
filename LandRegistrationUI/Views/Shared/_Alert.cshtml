@@ -1,0 +1,51 @@
+﻿@using LandRegistrationUI.Models
+
+
+
+@if (TempData[Constants.SuccessAlert] != null)
+{
+    <script>
+            swal({
+                title: "Success!",
+                text: "@TempData[Constants.SuccessAlert]",
+                icon: "success",
+                button: "Ok"
+            });
+    </script>
+}
+else if (TempData[Constants.ErrorAlert] != null)
+{
+    <script>
+            swal({
+                title: "Error!",
+                text: "@TempData[Constants.ErrorAlert]",
+                icon: "error",
+                button: "Ok",
+                dangerMode: true
+            });
+    </script>
+}
+else if (TempData[Constants.WarningAlert] != null)
+{
+    <script>
+            swal({
+                title: "Warning!",
+                text: "@TempData[Constants.WarningAlert]",
+                icon: "warning",
+                button: "Ok",
+                dangerMode: true
+            });
+    </script>
+}
+else if (TempData[Constants.InfoAlert] != null)
+{
+    <script>
+            swal({
+                title: "Information!",
+                text: "@TempData[Constants.InfoAlert]",
+                icon: "info",
+                button: "Ok"
+            });
+    </script>
+
+}
