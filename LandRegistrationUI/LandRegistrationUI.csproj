@@ -233,6 +233,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\download.jpg" />
+    <Content Include="Images\image.jpg" />
+    <Content Include="Images\nda-image.jpg" />
     <Content Include="Models\LandDataEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LandDataEntity.edmx</DependentUpon>
