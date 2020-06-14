@@ -27,6 +27,7 @@ namespace LandRegistrationUI.Controllers
         {
             db.RegionMasters.Add(model);
             db.SaveChanges();
+            TempData[Constants.SuccessAlert] = "Region Updated Successfully";
             return RedirectToAction(nameof(UpdateRegion));
         }
 
@@ -56,6 +57,7 @@ namespace LandRegistrationUI.Controllers
         {
             db.TalukMasters.Add(model);
             db.SaveChanges();
+            TempData[Constants.SuccessAlert] = "Taluk Updated Successfully";
             return RedirectToAction(nameof(UpdateTaluk));
         }
 
@@ -85,6 +87,7 @@ namespace LandRegistrationUI.Controllers
         {
             db.RevenueVillageMasters.Add(model);
             db.SaveChanges();
+            TempData[Constants.SuccessAlert] = "Revenue Village Updated Successfully";
             return RedirectToAction(nameof(UpdateRevenueVillage));
         }
 
@@ -114,6 +117,7 @@ namespace LandRegistrationUI.Controllers
         {
             db.WardMasters.Add(model);
             db.SaveChanges();
+            TempData[Constants.SuccessAlert] = "Ward Updated Successfully";
             return RedirectToAction(nameof(UpdateWard));
         }
 
@@ -129,6 +133,7 @@ namespace LandRegistrationUI.Controllers
         {
             db.BlockMasters.Add(model);
             db.SaveChanges();
+            TempData[Constants.SuccessAlert] = "Block Updated Successfully";
             return RedirectToAction(nameof(UpdateBlock));
         }
 
