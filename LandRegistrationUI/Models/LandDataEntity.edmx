@@ -81,6 +81,9 @@
           <Property Name="AddressLine1" Type="nvarchar" MaxLength="100" />
           <Property Name="AddressLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="AddressLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="PreviousOwnerAddLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="PreviousOwnerAddLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="PreviousOwnerAddLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="WardMaster">
@@ -440,6 +443,9 @@
           <Property Name="AddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AddressLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousOwnerAddLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousOwnerAddLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousOwnerAddLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BlockMaster" Relationship="LandDetailsModel.FK_UsersData_BlockMaster" FromRole="UsersData" ToRole="BlockMaster" />
           <NavigationProperty Name="RegionMaster" Relationship="LandDetailsModel.FK_UsersData_UsersData" FromRole="UsersData" ToRole="RegionMaster" />
@@ -589,6 +595,9 @@
             <EntityTypeMapping TypeName="LandDetailsModel.UsersData">
               <MappingFragment StoreEntitySet="UsersData">
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="PreviousOwnerAddLine3" ColumnName="PreviousOwnerAddLine3" />
+                <ScalarProperty Name="PreviousOwnerAddLine2" ColumnName="PreviousOwnerAddLine2" />
+                <ScalarProperty Name="PreviousOwnerAddLine1" ColumnName="PreviousOwnerAddLine1" />
                 <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
                 <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
                 <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />

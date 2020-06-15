@@ -35,6 +35,9 @@ namespace LandRegistrationUI.Models
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }
+        public string PreviousOwnerAddLine1 { get; set; }
+        public string PreviousOwnerAddLine2 { get; set; }
+        public string PreviousOwnerAddLine3 { get; set; }
         public string Remarks { get; set; }
     
         public virtual BlockMaster BlockMaster { get; set; }
