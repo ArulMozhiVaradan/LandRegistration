@@ -218,6 +218,7 @@
     <Compile Include="Models\UsersData.cs">
       <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\LandSearchViewModel.cs" />
     <Compile Include="Models\WardMaster.cs">
       <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>

@@ -1,4 +1,4 @@
-﻿
+﻿@model LandRegistrationUI.Models.ViewModels.LandSearchViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -25,20 +25,28 @@
     </div>
     <hr />
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Index", "LandDetail", FormMethod.Post))
     {
+
+        @*@Html.HiddenFor(x => x.Region)
+            @Html.HiddenFor(x => x.Taluk)
+            @Html.HiddenFor(x => x.Revenue)
+            @Html.HiddenFor(x => x.Ward)
+            @Html.HiddenFor(x => x.Block)*@
+
         <div class="row">
             <div class="col-12 col-sm-6">
                 <div class="row">
                     <div class="col-3 label_text">Region</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <select class="custom-select">
-                                <option selected="">Please select</option>
-                                <option value="1">Puducherry</option>
-                                <option value="2">Mahe</option>
-                                <option value="3">Yanam</option>
-                            </select>
+                            @Html.DropDownListFor(x => x.Region, (IEnumerable<SelectListItem>)Model.RegionList, "Please Select", new { @class = "custom-select", id = "ddlRegion" })
+                            @*<select class="custom-select">
+                                    <option selected="">Please select</option>
+                                    <option value="1">Puducherry</option>
+                                    <option value="2">Mahe</option>
+                                    <option value="3">Yanam</option>
+                                </select>*@
                         </div>
                     </div>
                 </div>
@@ -48,13 +56,14 @@
                     <div class="col-3 label_text">Taluk</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <select class="custom-select">
-                                <option selected="">Please select</option>
+                            @Html.DropDownListFor(x => x.Taluk, (IEnumerable<SelectListItem>)Model.TalukList, "Please Select", new { @class = "custom-select", id = "ddlTaluk" })
+                            @*<select class="custom-select" id="ddlTaluk">
+                                                   <option selected="">Please select</option>
                                 <option value="1">Puducherry</option>
                                 <option value="2">Ozhukarai</option>
                                 <option value="3">Bahour</option>
                                 <option value="3">Villianur</option>
-                            </select>
+                                                    </select>*@
                         </div>
                     </div>
                 </div>
@@ -67,15 +76,16 @@
                     <div class="col-3 label_text">Revenue/Village</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <select class="custom-select">
-                                <option selected="">Please select</option>
+                            @Html.DropDownListFor(x => x.Revenue, (IEnumerable<SelectListItem>)Model.RevenueList, "Please Select", new { @class = "custom-select", id = "ddlRevenue" })
+                            @*<select class="custom-select" id="ddlRevenue">
+                                                   <option selected="">Please select</option>
                                 <option value="1">Pudupalayam</option>
                                 <option value="2">Puducherry</option>
                                 <option value="3">Olandai</option>
                                 <option value="3">Thengaithitu</option>
                                 <option value="3">Murugampakam</option>
                                 <option value="3">Kommapakkam</option>
-                            </select>
+                                                    </select>*@
                         </div>
                     </div>
                 </div>
@@ -85,7 +95,8 @@
                     <div class="col-3 label_text">LGR</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter LGR" />
+                            @*<input type="text" class="form-control" placeholder="Enter LGR" />*@
+                            @Html.TextBoxFor(x => x.LGR, new { @class = "form-control", placeholder = "Enter LGR" })
                         </div>
                     </div>
                 </div>
@@ -98,12 +109,13 @@
                     <div class="col-3 label_text">Ward</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <select class="custom-select">
-                                <option selected="">Please select</option>
-                                <option value="1">A</option>
-                                <option value="2">B</option>
-                                <option value="3">C</option>
-                            </select>
+                            @Html.DropDownListFor(x => x.Ward, (IEnumerable<SelectListItem>)Model.WardList, "Please Select", new { @class = "custom-select", id = "ddlWard" })
+                            @*<select class="custom-select" id="ddlWard">
+                                    <option selected="">Please select</option>
+                                        <option value="1">A</option>
+                                        <option value="2">B</option>
+                                        <option value="3">C</option>
+                                </select>*@
                         </div>
                     </div>
                 </div>
@@ -113,12 +125,13 @@
                     <div class="col-3 label_text">Block</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <select class="custom-select">
-                                <option selected="">Please select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            @Html.DropDownListFor(x => x.Block, (IEnumerable<SelectListItem>)Model.BlockList, "Please Select", new { @class = "custom-select", id = "ddlBlock" })
+                            @*<select class="custom-select" id="ddlBlock">
+                                    <option selected="">Please select</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                </select>*@
                         </div>
                     </div>
                 </div>
@@ -131,21 +144,22 @@
                     <div class="col-3 label_text">T.S.No</div>
                     <div class="col-9">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter TS.No" />
+                            @*<input type="text" class="form-control" placeholder="Enter TS.No" />*@
+                            @Html.TextBoxFor(x => x.TSNo, new { @class = "form-control", placeholder = "Enter TS.No" })
                         </div>
                     </div>
                 </div>
             </div>
             @*<div class="col-12 col-sm-6">
-                <div class="row">
-                    <div class="col-3 label_text">R.S.No</div>
-                    <div class="col-9">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter RS.No" />
+                    <div class="row">
+                        <div class="col-3 label_text">R.S.No</div>
+                        <div class="col-9">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter RS.No" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
         </div>
         <div class="row">
             <div class="col-12">
@@ -177,7 +191,10 @@
                 </div>
             </div>
         </div>
-        <hr />
+    }
+
+    @if (Model.LandDetails != null)
+    {
         <div class="row mt-5 mb-5">
             <div class="col-12">
                 <h4 class="text-center">Results</h4>
@@ -195,133 +212,149 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>Villianur</td>
-                            <td>Puducherry</td>
-                            <td>61</td>
-                            <td>0001</td>
-                            <td class="text-center">
-                                <a href="@Url.Action("UserRecord","LandDetail")" class="btn btn-success">View</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Villianur</td>
-                            <td>Puducherry</td>
-                            <td>63</td>
-                            <td>0002</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Villianur</td>
-                            <td>Puducherry</td>
-                            <td>66</td>
-                            <td>0003</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Rainbow Nagar</td>
-                            <td>Puducherry</td>
-                            <td>22</td>
-                            <td>0004</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Muthialpet</td>
-                            <td>Puducherry</td>
-                            <td>33</td>
-                            <td>0005</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Brielle Williamson</td>
-                            <td>Muthialpet</td>
-                            <td>Puducherry</td>
-                            <td>61</td>
-                            <td>0006</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Herrod Chandler</td>
-                            <td>TV Nagar</td>
-                            <td>Mahe</td>
-                            <td>59</td>
-                            <td>0007</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Rhona Davidson</td>
-                            <td>TV Nagar</td>
-                            <td>Karaikal</td>
-                            <td>55</td>
-                            <td>0008</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Colleen Hurst</td>
-                            <td>Kamaraj Nagar</td>
-                            <td>Puducherry</td>
-                            <td>39</td>
-                            <td>0009</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sonya Frost</td>
-                            <td>Villianur</td>
-                            <td>Mahe</td>
-                            <td>23</td>
-                            <td>0010</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jena Gaines</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>30</td>
-                            <td>2008/12/19</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Quinn Flynn</td>
-                            <td>Support Lead</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2013/03/03</td>
-                            <td class="text-center">
-                                <button class="btn btn-success">View</button>
-                            </td>
-                        </tr>
-                        
+                        @foreach (var item in Model.LandDetails)
+                        {
+                            <tr>
+                                <td>@item.OwnerName</td>
+                                <td>@item.TalukName</td>
+                                <td>@item.RegionName</td>
+                                <td>@item.TSNo</td>
+                                <td>@item.RSNo</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("UserDetails","LandDetail")?id=@item.ID" class="btn btn-success">View</a>
+                                </td>
+                            </tr>
+                        }
+                        @*<tr>
+                                <td>Tiger Nixon</td>
+                                <td>Villianur</td>
+                                <td>Puducherry</td>
+                                <td>61</td>
+                                <td>0001</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("UserRecord","LandDetail")" class="btn btn-success">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Garrett Winters</td>
+                                <td>Villianur</td>
+                                <td>Puducherry</td>
+                                <td>63</td>
+                                <td>0002</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ashton Cox</td>
+                                <td>Villianur</td>
+                                <td>Puducherry</td>
+                                <td>66</td>
+                                <td>0003</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cedric Kelly</td>
+                                <td>Rainbow Nagar</td>
+                                <td>Puducherry</td>
+                                <td>22</td>
+                                <td>0004</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Airi Satou</td>
+                                <td>Muthialpet</td>
+                                <td>Puducherry</td>
+                                <td>33</td>
+                                <td>0005</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Brielle Williamson</td>
+                                <td>Muthialpet</td>
+                                <td>Puducherry</td>
+                                <td>61</td>
+                                <td>0006</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Herrod Chandler</td>
+                                <td>TV Nagar</td>
+                                <td>Mahe</td>
+                                <td>59</td>
+                                <td>0007</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Rhona Davidson</td>
+                                <td>TV Nagar</td>
+                                <td>Karaikal</td>
+                                <td>55</td>
+                                <td>0008</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Colleen Hurst</td>
+                                <td>Kamaraj Nagar</td>
+                                <td>Puducherry</td>
+                                <td>39</td>
+                                <td>0009</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sonya Frost</td>
+                                <td>Villianur</td>
+                                <td>Mahe</td>
+                                <td>23</td>
+                                <td>0010</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jena Gaines</td>
+                                <td>Office Manager</td>
+                                <td>London</td>
+                                <td>30</td>
+                                <td>2008/12/19</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quinn Flynn</td>
+                                <td>Support Lead</td>
+                                <td>Edinburgh</td>
+                                <td>22</td>
+                                <td>2013/03/03</td>
+                                <td class="text-center">
+                                    <button class="btn btn-success">View</button>
+                                </td>
+                            </tr>*@
+
                     </tbody>
                 </table>
             </div>
         </div>
-
     }
+    <hr />
+
+
+
 </div>
 @section scripts{
 
@@ -329,8 +362,139 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
+        function clearTakuk() {
+            $("#ddlTaluk").html('');
+            $("#Taluk").val('');
+            clearRevenue();
+        }
+
+        function clearRevenue() {
+            $("#ddlRevenue").html('');
+            $("#Revenue").val('');
+            clearWardAndBlock();
+        }
+
+        function clearWardAndBlock() {
+            $("#ddlWard").html('');
+            $("#ddlBlock").html('');
+            $("#Ward").val('');
+            $("#Block").val('');
+        }
+
+        function setInitialOption(element, data) {
+            if (data.length > 0) {
+                element.html(`<option value="">Please Select</option>`);
+            }
+            else {
+                element.html(`<option value="">No Record</option>`);
+            }
+        }
+
         $(document).ready(function () {
             $('#example').DataTable();
+
+            $("#ddlRegion").change(function () {
+                var regionId = $(this).val();
+                clearTakuk();
+                //console.log(regionId);
+                if (regionId == '') {
+                    $("#Region").val('');
+                    return;
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("GetTaluks","LandDetail")?regionId=' + regionId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data: ' , data);
+                        $("#Region").val(regionId);
+                        setInitialOption($("#ddlTaluk"),data);
+
+                        $.each(data, function (key, value) {
+                            $("#ddlTaluk").append(`<option value="${value.TalukID}">${value.TalukName}</option>`);
+                        });
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            });
+
+            $("#ddlTaluk").change(function () {
+                var talukId = $(this).val();
+                clearRevenue();
+                console.log(talukId);
+                if (talukId == '') {
+                    $("#Taluk").val('');
+                    return;
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("GetRevenue", "LandDetail")?talukId=' + talukId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data: ' , data);
+                        $("#Taluk").val(talukId);
+                        setInitialOption($("#ddlRevenue"), data);
+                        $.each(data, function (key, value) {
+                            $("#ddlRevenue").append(`<option value="${value.Id}">${value.RevenueVillageName}</option>`);
+                        });
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            });
+
+            $("#ddlRevenue").change(function () {
+                var revenueId = $(this).val();
+                clearWardAndBlock();
+                console.log(revenueId);
+
+                if (revenueId == '') {
+                    $("#Revenue").val('');
+                    return;
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("GetWardAndBlock", "LandDetail")?revenueId=' + revenueId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data: ' , data);
+                        $("#Revenue").val(revenueId);
+                        setInitialOption($("#ddlWard"), data.Ward);
+                        setInitialOption($("#ddlBlock"), data.Block);
+                        $.each(data.Ward, function (key, value) {
+                            $("#ddlWard").append(`<option value="${value.WardID}">${value.WardName}</option>`);
+                        });
+                        $.each(data.Block, function (key, value) {
+                            $("#ddlBlock").append(`<option value="${value.BlockID}">${value.BlockName}</option>`);
+                        });
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            });
+
+            $("#ddlWard").change(function () {
+                var id = $(this).val();
+                $("#Ward").val(id);
+            });
+            $("#ddlBlock").change(function () {
+                var id = $(this).val();
+                $("#Block").val(id);
+            });
+
+
+
+
         });
     </script>
 
