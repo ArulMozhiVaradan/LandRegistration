@@ -328,6 +328,7 @@
     <Content Include="Views\Update\UpdateBlock.cshtml" />
     <Content Include="Views\LandDetail\UserDetails.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
+    <Content Include="Views\LandDetail\AddUserData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

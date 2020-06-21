@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace LandRegistrationUI.Models.ViewModels
 {
@@ -18,11 +19,14 @@ namespace LandRegistrationUI.Models.ViewModels
         public string RSNo { get; set; }
         public string SubDivision { get; set; }
         public List<LandDetailsModel> LandDetails { get; set; }
+        public LandDetailsModel Details { get; set; }
         public IEnumerable<SelectListItem> RegionList { get; set; } = new List<SelectListItem>();
         public IEnumerable<SelectListItem> TalukList { get; set; } = new List<SelectListItem>();
         public IEnumerable<SelectListItem> RevenueList { get; set; } = new List<SelectListItem>();
         public IEnumerable<SelectListItem> WardList { get; set; } = new List<SelectListItem>();
         public IEnumerable<SelectListItem> BlockList { get; set; } = new List<SelectListItem>();
+        [Display(Name = "Browse File")]
+        public HttpPostedFileBase[] files { get; set; }
 
     }
 

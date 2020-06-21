@@ -1,0 +1,394 @@
+﻿@model LandRegistrationUI.Models.ViewModels.LandSearchViewModel
+@{
+    ViewBag.Title = "AddUserData";
+}
+
+<style>
+    .label_text {
+        font-size: 16px;
+        padding-top: 5px;
+        font-weight: 500;
+    }
+
+    .custom_checkbox {
+        display: inline-block;
+        margin: 5px 15px;
+    }
+</style>
+ 
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="text-center">Add User Data</h4>
+        </div>
+    </div>
+    <hr />
+
+    @using (Html.BeginForm("AddUserData", "LandDetail", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Region</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Region, (IEnumerable<SelectListItem>)Model.RegionList, "Please Select", new { @class = "custom-select", id = "ddlRegion" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Taluk</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Taluk, (IEnumerable<SelectListItem>)Model.TalukList, "Please Select", new { @class = "custom-select", id = "ddlTaluk" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Revenue/Village</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Revenue, (IEnumerable<SelectListItem>)Model.RevenueList, "Please Select", new { @class = "custom-select", id = "ddlRevenue" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">LGR</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.LGR, new { @class = "form-control", placeholder = "Enter LGR" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6" id="WardBlock">
+                <div class="row">
+                    <div class="col-3 label_text">Ward</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Ward, (IEnumerable<SelectListItem>)Model.WardList, "Please Select", new { @class = "custom-select", id = "ddlWard" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6" id="blockblock">
+                <div class="row">
+                    <div class="col-3 label_text">Block</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Block, (IEnumerable<SelectListItem>)Model.BlockList, "Please Select", new { @class = "custom-select", id = "ddlBlock" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">T.S.No</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.TSNo, new { @class = "form-control", placeholder = "Enter TS.No" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">R.S.No</div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.RSNo, new { @class = "form-control", placeholder = "Enter RS.No" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-3 col-md-2 label_text">Sub-division</div>
+                        <div class="col-9">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox custom_checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                    <label class="custom-control-label" for="customCheck1">Sub-division 1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom_checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+                                    <label class="custom-control-label" for="customCheck2">Sub-division 2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom_checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck3" checked="">
+                                    <label class="custom-control-label" for="customCheck3">Sub-division 3</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Owner Name</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.OwnerName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Tenant Name</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.TenantName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Address</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.AddressLine1, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Previous Owner Address</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.PreviousOwnerAddLine1, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text"></div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.AddressLine2, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text"></div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.PreviousOwnerAddLine2, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text"></div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.AddressLine3, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text"></div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.Details.PreviousOwnerAddLine3, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-1 label_text">Files</div>
+            <div class="col-9" style="padding-left: 60px;">
+                @Html.TextBoxFor(Model => Model.files, new { @type = "file", @multiple = "multiple" , @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-1 label_text">Remarks</div>
+            <div class="col-9" style="padding-left: 60px;">
+                @Html.TextAreaFor(Model => Model.Details.Remarks, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <div>
+                    <button class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr />
+
+
+
+</div>
+
+@section scripts{
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+        function clearTakuk() {
+            $("#ddlTaluk").html('');
+            $("#Taluk").val('');
+            clearRevenue();
+        }
+
+        function clearRevenue() {
+            $("#ddlRevenue").html('');
+            $("#Revenue").val('');
+            clearWardAndBlock();
+        }
+
+        function clearWardAndBlock() {
+            $("#ddlWard").html('');
+            $("#ddlBlock").html('');
+            $("#Ward").val('');
+            $("#Block").val('');
+        }
+
+        function setInitialOption(element, data) {
+            if (data.length > 0) {
+                element.html(`<option value="">Please Select</option>`);
+            }
+            else {
+                element.html(`<option value="">No Record</option>`);
+            }
+        }
+
+        $(document).ready(function () {
+            $('#example').DataTable();
+
+            $('#ddlWard').change(function () {
+                $('#blockblock').css("display", "none");
+            });
+
+            $('#ddlBlock').change(function () {
+                $('#WardBlock').css("display", "none");
+            });
+
+            $("#ddlRegion").change(function () {
+                var regionId = $(this).val();
+                clearTakuk();
+                //console.log(regionId);
+                if (regionId == '') {
+                    $("#Region").val('');
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("GetTaluks","LandDetail")?regionId=' + regionId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data: ' , data);
+                        $("#Region").val(regionId);
+                        setInitialOption($("#ddlTaluk"),data);
+
+                        $.each(data, function (key, value) {
+                            $("#ddlTaluk").append(`<option value="${value.TalukID}">${value.TalukName}</option>`);
+                        });
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            });
+
+            $("#ddlTaluk").change(function () {
+                var talukId = $(this).val();
+                clearRevenue();
+                console.log(talukId);
+                if (talukId == '') {
+                    $("#Taluk").val('');
+                    return;
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("GetRevenue", "LandDetail")?talukId=' + talukId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data: ' , data);
+                        $("#Taluk").val(talukId);
+                        setInitialOption($("#ddlRevenue"), data);
+                        $.each(data, function (key, value) {
+                            $("#ddlRevenue").append(`<option value="${value.Id}">${value.RevenueVillageName}</option>`);
+                        });
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            });
+
+            $("#ddlRevenue").change(function () {
+                var revenueId = $(this).val();
+                clearWardAndBlock();
+                console.log(revenueId);
+
+                if (revenueId == '') {
+                    $("#Revenue").val('');
+                    return;
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("GetWardAndBlock", "LandDetail")?revenueId=' + revenueId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data: ' , data);
+                        $("#Revenue").val(revenueId);
+                        setInitialOption($("#ddlWard"), data.Ward);
+                        setInitialOption($("#ddlBlock"), data.Block);
+                        $.each(data.Ward, function (key, value) {
+                            $("#ddlWard").append(`<option value="${value.WardID}">${value.WardName}</option>`);
+                        });
+                        $.each(data.Block, function (key, value) {
+                            $("#ddlBlock").append(`<option value="${value.BlockID}">${value.BlockName}</option>`);
+                        });
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            });
+
+            $("#ddlWard").change(function () {
+                var id = $(this).val();
+                $("#Ward").val(id);
+            });
+            $("#ddlBlock").change(function () {
+                var id = $(this).val();
+                $("#Block").val(id);
+            });
+
+        });
+    </script>
+
+}

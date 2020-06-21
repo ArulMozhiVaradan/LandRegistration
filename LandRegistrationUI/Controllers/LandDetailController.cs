@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -122,8 +123,69 @@ namespace LandRegistrationUI.Controllers
 
         public ActionResult UserDetails(int id)
         {
-            var details = db.UsersDatas.FirstOrDefault(x => x.ID == id);
+            var details = db.UsersDatas.Include(x=>x.UserImages).FirstOrDefault(x => x.ID == id);
             return View(details);
         }
+
+        public ActionResult AddUserData()
+        {
+            LandSearchViewModel model = new LandSearchViewModel();
+            var regions = db.RegionMasters.ToList();
+            model.RegionList = regions.Select(x => new SelectListItem() { Text = x.Region, Value = x.Id.ToString() }).ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUserData(LandSearchViewModel model)
+        {
+            UsersData data = new UsersData()
+            {
+                RegionID = (byte)model.Region,
+                TalukID = model.Taluk,
+                RevenueVillageID = model.Revenue,
+                OwnerName = model.Details.OwnerName,
+                TenantName = model.Details.TenantName,
+                AddressLine1 = model.Details.AddressLine1,
+                AddressLine2 = model.Details.AddressLine2,
+                AddressLine3 = model.Details.AddressLine3,
+                PreviousOwnerAddLine1 = model.Details.PreviousOwnerAddLine1,
+                PreviousOwnerAddLine2 = model.Details.PreviousOwnerAddLine2,
+                PreviousOwnerAddLine3 = model.Details.PreviousOwnerAddLine3,
+                PattaNo = model.LGR,
+                RSNo = model.RSNo,
+                TSNo = model.TSNo,
+                Remarks = model.Details.Remarks,
+
+            };
+            if (model.Ward != 0)
+                data.WardID = model.Ward;
+            if (model.Block != 0)
+                data.BlockID = model.Block;
+            var id = db.UsersDatas.Add(data);
+            db.SaveChanges();
+            List<UserImage> images = new List<UserImage>();
+            foreach (HttpPostedFileBase file in model.files)
+            {
+                if (file != null)
+                {
+                    var InputFileName = Path.GetFileName(file.FileName);
+                    var ServerSavePath = Path.Combine(Server.MapPath("~/Images/") + InputFileName);
+                    var path = "/Images/"+InputFileName;
+                    file.SaveAs(ServerSavePath);
+                    UserImage image = new UserImage()
+                    {
+                        UserDataID = id.ID,
+                        ImagePath = path
+                    };
+                    images.Add(image);
+                }
+            }
+            db.UserImages.AddRange(images);
+            db.SaveChanges();
+            TempData[Constants.SuccessAlert] = "Updated Successfully";
+            return RedirectToAction(nameof(AddUserData));
+        }
+
     }
 }

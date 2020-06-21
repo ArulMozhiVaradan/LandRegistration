@@ -131,30 +131,30 @@
 
 
         </div>
-        <br />
-        <div class="row">
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-3 col-md-2 label_text">Sub-division</div>
-                    <div class="col-9">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox custom_checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                <label class="custom-control-label" for="customCheck1">Sub-division 1</label>
-                            </div>
-                            <div class="custom-control custom-checkbox custom_checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
-                                <label class="custom-control-label" for="customCheck2">Sub-division 2</label>
-                            </div>
-                            <div class="custom-control custom-checkbox custom_checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck3" checked="">
-                                <label class="custom-control-label" for="customCheck3">Sub-division 3</label>
+        @*<br />
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-3 col-md-2 label_text">Sub-division</div>
+                        <div class="col-9">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox custom_checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                    <label class="custom-control-label" for="customCheck1">Sub-division 1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom_checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+                                    <label class="custom-control-label" for="customCheck2">Sub-division 2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom_checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck3" checked="">
+                                    <label class="custom-control-label" for="customCheck3">Sub-division 3</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>*@
         <br />
         <div class="row">
             <div class="col-12 col-sm-6">
@@ -184,6 +184,14 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Previous Owner Address</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.PreviousOwnerAddLine1, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
         </div>
         <br />
         <div class="row">
@@ -192,6 +200,14 @@
                     <div class="col-3 label_text"></div>
                     <div class="col-9">
                         @Html.TextBoxFor(Model => Model.AddressLine2, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text"></div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.PreviousOwnerAddLine2, new { @readonly = "readonly", @class = "form-control" })
                     </div>
                 </div>
             </div>
@@ -206,11 +222,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-3 label_text">Address</div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(Model => Model.PreviousOwnerAddLine3, new { @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
         </div>
         <br />
         <div class="row">
             <div class="col-1 label_text">Remarks</div>
-            <div class="col-9">
+            <div class="col-9" style="padding-left: 60px;">
                 @Html.TextAreaFor(Model => Model.Remarks, new { @readonly = "readonly", @class = "form-control" })
             </div>
         </div>
@@ -222,22 +246,24 @@
         </div>
         <hr />
         <div class="row">
+                <div class="col-md-12">
+                    <div class="row image_row">
+                        <div class="column image_column">
+                            <img src="~/Images/download.jpg" />
+                            <img src="~/Images/nda-image.jpg" />
+                            <img src="~/Images/image.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="row image_row">
                     <div class="column image_column">
-                        <img src="~/Images/download.jpg" />
-                        <img src="~/Images/nda-image.jpg" />
-                        <img src="~/Images/image.jpg" />
-                    </div>
-                    <div class="column image_column">
-                        <img src="~/Images/download.jpg" />
-                        <img src="~/Images/nda-image.jpg" />
-                        <img src="~/Images/image.jpg" />
-                    </div>
-                    <div class="column image_column">
-                        <img src="~/Images/download.jpg" />
-                        <img src="~/Images/nda-image.jpg" />
-                        <img src="~/Images/image.jpg" />
+                        @foreach (var item in Model.UserImages)
+                        {
+                            <img src="@item.ImagePath" />
+                        }
                     </div>
                 </div>
             </div>
