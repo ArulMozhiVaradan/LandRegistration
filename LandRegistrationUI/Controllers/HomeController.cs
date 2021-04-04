@@ -11,7 +11,7 @@ namespace LandRegistrationUI.Controllers
     {
         public ActionResult Index()
         {
-            TempData[Constants.SuccessAlert] ="Everything OK";
+            //TempData[Constants.SuccessAlert] ="Everything OK";
             return View();
 
         }

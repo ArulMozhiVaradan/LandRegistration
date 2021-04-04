@@ -13,13 +13,13 @@
             {
                 @Html.AntiForgeryToken()
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         Region Name
                     </div>
                     <div class="col-md-4">
                         @Html.TextBoxFor(Model => Model.Region, new { @required = "required", @class = "form-control" })
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 text-center">
                         <button type="submit" value="Add" class="btn btn-primary"> Add</button>
                     </div>
                 </div>

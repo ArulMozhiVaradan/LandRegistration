@@ -123,7 +123,7 @@ namespace LandRegistrationUI.Controllers
 
         public ActionResult UserDetails(int id)
         {
-            var details = db.UsersDatas.Include(x=>x.UserImages).FirstOrDefault(x => x.ID == id);
+            var details = db.UsersDatas.Include(x => x.UserImages).FirstOrDefault(x => x.ID == id);
             return View(details);
         }
 
@@ -139,6 +139,15 @@ namespace LandRegistrationUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddUserData(LandSearchViewModel model)
         {
+
+            var isImagesValid = ValidateUploadedImage(model.files);
+
+            if (isImagesValid == false)
+            {
+                TempData[Constants.ErrorAlert] = "Please upload JPG image files";
+                return View(model);
+            }
+
             UsersData data = new UsersData()
             {
                 RegionID = (byte)model.Region,
@@ -167,11 +176,13 @@ namespace LandRegistrationUI.Controllers
             List<UserImage> images = new List<UserImage>();
             foreach (HttpPostedFileBase file in model.files)
             {
+
+
                 if (file != null)
                 {
                     var InputFileName = Path.GetFileName(file.FileName);
                     var ServerSavePath = Path.Combine(Server.MapPath("~/Images/") + InputFileName);
-                    var path = "/Images/"+InputFileName;
+                    var path = "/Images/" + InputFileName;
                     file.SaveAs(ServerSavePath);
                     UserImage image = new UserImage()
                     {
@@ -185,6 +196,20 @@ namespace LandRegistrationUI.Controllers
             db.SaveChanges();
             TempData[Constants.SuccessAlert] = "Updated Successfully";
             return RedirectToAction(nameof(AddUserData));
+        }
+
+        private bool ValidateUploadedImage(HttpPostedFileBase[] files)
+        {
+            foreach (var file in files)
+            {
+                var extension = Path.GetExtension(file.FileName);
+                if (extension.ToLower() != ".jpg")
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
     }

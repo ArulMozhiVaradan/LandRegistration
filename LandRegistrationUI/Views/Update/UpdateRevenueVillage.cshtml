@@ -13,8 +13,8 @@
             @using (Html.BeginForm("UpdateRevenueVillage", "Update", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-md-1">
+                <div class="row mt-3">
+                    <div class="col-md-3">
                         Village Name
                     </div>
                     <div class="col-md-4">
@@ -22,22 +22,25 @@
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-md-1">
+                <div class="row mt-3">
+                    <div class="col-md-3">
                         Select Taluk
                     </div>
                     <div class="col-md-4">
                         @Html.DropDownListFor(model => model.TalukID, ViewBag.regionList as IEnumerable<SelectListItem>, "Please Select", new { @class = "btn form-control btn-secondary dropdown-toggle" })
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="text-left" style="margin-left: 15%;padding-bottom:10px">
-                            @Html.CheckBoxFor(Model => Model.IsWard, new { @class = "IsSelected" }) <span style="padding-left:5px"><b>Check if it is Ward</b></span>
+                <div class="row mt-3">
+                    <div class="col-md-7">
+                        <div class="text-left" style="padding-bottom:10px">
+                            <label>
+                                @Html.CheckBoxFor(Model => Model.IsWard, new { @class = "IsSelected" }) <span style="padding-left:5px"><b>Check if it is Ward</b></span>
+                            </label>
+                            
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-md-5 text-center">
                         <button type="submit" value="Add" class="btn btn-primary"> Add</button>
                     </div>

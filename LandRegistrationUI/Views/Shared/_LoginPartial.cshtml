@@ -1,29 +1,76 @@
 ﻿@using Microsoft.AspNet.Identity
+
+
+
+
+
 @if (Request.IsAuthenticated)
 {
+
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active navbar_menu">
+            <a class="nav-link" href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item active navbar_menu"><a class="nav-link" href="@Url.Action("Index","LandDetail")"><i class="fa fa-search"></i> Search</a></li>k
+        <li class="nav-item dropdown navbar_menu active">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus"></i> Add</a>
+            <div class="dropdown-menu">
+
+                <a class="dropdown-item" href="@Url.Action("AddUserData","LandDetail")">Land Details</a>
+
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="@Url.Action("UpdateRegion","Update")">Region</a>
+                <a class="dropdown-item" href="@Url.Action("UpdateTaluk", "Update")">Taluk</a>
+                <a class="dropdown-item" href="@Url.Action("UpdateRevenueVillage", "Update")">Revenue/Village</a>
+                <a class="dropdown-item" href="@Url.Action("UpdateWard", "Update")">Ward</a>
+                <a class="dropdown-item" href="@Url.Action("UpdateBlock", "Update")">Block</a>
+
+
+                @*<a class="dropdown-item" href="#">UpdateTaluk</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+
+        <a class="dropdown-item" href="#">Separated link</a>*@
+            </div>
+        </li>
+    </ul>
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item active navbar_menu"><a class="nav-link" href="@Url.Action("Index","LandDetail")">Search Land</a></li>
-        <li class="nav-item navbar_menu">
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
-        </li>
-        <li class="nav-item active navbar_menu"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            <li class="nav-item navbar_menu">
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
+            </li>
+            <li class="nav-item active navbar_menu login_button"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     }
 }
 else
 {
-<ul class="nav navbar-nav navbar-right">
-    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-    <li class="nav-item active navbar_menu">
-        <a class="nav-link" id="registerLink" href="@Url.Action("Register", "Account")">Register</a>
-    </li>
-    <li class="nav-item active navbar_menu">
-        <a class="nav-link" id="loginLink" href="@Url.Action("Login", "Account")">Log in</a>
-    </li>
-</ul>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active navbar_menu">
+            <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
+        </li>
+        <li class="nav-item active navbar_menu">
+            <a class="nav-link" href="@Url.Action("About", "Home")">About</a>
+        </li>
+        <li class="nav-item active navbar_menu">
+            <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+        <li class="nav-item active navbar_menu">
+            <a class="nav-link" id="registerLink" href="@Url.Action("Register", "Account")">Register</a>
+        </li>
+        <li class="nav-item active navbar_menu login_button">
+            <a class="nav-link" id="loginLink " href="@Url.Action("Login", "Account")">Log in</a>
+        </li>
+    </ul>
 }

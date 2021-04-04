@@ -247,6 +247,7 @@
       <DependentUpon>LandDataEntity.edmx</DependentUpon>
       <LastGenOutput>LandDataEntity.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\LandDataEntity.edmx.sql" />
     <Content Include="Models\LandDataEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LandDataEntity.edmx</DependentUpon>

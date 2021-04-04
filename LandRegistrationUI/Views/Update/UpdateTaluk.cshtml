@@ -13,8 +13,8 @@
             @using (Html.BeginForm("UpdateTaluk", "Update", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-md-1">
+                <div class="row mt-3">
+                    <div class="col-md-3">
                         Taluk Name
                     </div>
                     <div class="col-md-4">
@@ -22,15 +22,15 @@
                     </div>
                     
                 </div>
-                <div class="row">
-                    <div class="col-md-1">
+                <div class="row mt-3">
+                    <div class="col-md-3">
                         Select Region
                     </div>
                     <div class="col-md-4">
                         @Html.DropDownListFor(model => model.RegionID, ViewBag.regionList as IEnumerable<SelectListItem>, "Please Select", new { @class = "btn form-control btn-secondary dropdown-toggle" })
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-md-5 text-center">
                         <button type="submit" value="Add" class="btn btn-primary"> Add</button>
                     </div>

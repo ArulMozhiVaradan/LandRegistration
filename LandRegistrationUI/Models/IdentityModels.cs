@@ -21,7 +21,7 @@ namespace LandRegistrationUI.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("LandDetailsEntities", throwIfV1Schema: false)
+            : base("LandRecordConnection", throwIfV1Schema: false)
         {
         }
 
