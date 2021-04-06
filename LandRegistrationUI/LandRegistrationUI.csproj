@@ -275,6 +275,7 @@
     <Content Include="Content\fonts\slick.ttf" />
     <Content Include="Content\fonts\slick.woff" />
     <Content Include="DB\LandRecord.bak" />
+    <None Include="Properties\PublishProfiles\landrecord.innovatenew.in - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
