@@ -1,4 +1,5 @@
-﻿using LandRegistrationUI.Models;
+﻿using LandRegistrationUI.BusinessLogic;
+using LandRegistrationUI.Models;
 using LandRegistrationUI.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -212,5 +213,18 @@ namespace LandRegistrationUI.Controllers
             return true;
         }
 
+        public ActionResult SendMail()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult SendMail(EmailModel model)
+        {
+            Email.SendMail(model.ToMailId,model.Subject,model.Body);
+            TempData[Constants.SuccessAlert] = "Mail Sent Successfully";
+            return View();
+        }
     }
 }

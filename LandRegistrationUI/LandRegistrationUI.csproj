@@ -219,6 +219,7 @@
     <Compile Include="Models\UsersData.cs">
       <DependentUpon>LandDataEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\EmailModel.cs" />
     <Compile Include="Models\ViewModels\LandSearchViewModel.cs" />
     <Compile Include="Models\WardMaster.cs">
       <DependentUpon>LandDataEntity.tt</DependentUpon>
@@ -333,6 +334,7 @@
     <Content Include="Views\LandDetail\UserDetails.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
     <Content Include="Views\LandDetail\AddUserData.cshtml" />
+    <Content Include="Views\LandDetail\SendMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
