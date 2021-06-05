@@ -236,6 +236,8 @@
     <Content Include="Content\fonts\flexslider-icon.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\slick.svg" />
+    <Content Include="Content\leaflet\leaflet-locationpicker.css" />
+    <Content Include="Content\leaflet\leaflet-locationpicker.js" />
     <Content Include="Content\login_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -39,6 +39,8 @@ namespace LandRegistrationUI.Models
         public string PreviousOwnerAddLine2 { get; set; }
         public string PreviousOwnerAddLine3 { get; set; }
         public string Remarks { get; set; }
+        public string Location { get; set; }
+        public string Email { get; set; }
     
         public virtual BlockMaster BlockMaster { get; set; }
         public virtual RegionMaster RegionMaster { get; set; }

@@ -15,7 +15,7 @@
         margin: 5px 15px;
     }
 </style>
- 
+
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">
@@ -221,7 +221,7 @@
         <div class="row">
             <div class="col-1 label_text">Files</div>
             <div class="col-9" style="padding-left: 60px;">
-                @Html.TextBoxFor(Model => Model.files, new { @type = "file", @multiple = "multiple" , @class = "form-control" })
+                @Html.TextBoxFor(Model => Model.files, new { @type = "file", @multiple = "multiple", @class = "form-control" })
             </div>
         </div>
         <br />
@@ -229,6 +229,16 @@
             <div class="col-1 label_text">Remarks</div>
             <div class="col-9" style="padding-left: 60px;">
                 @Html.TextAreaFor(Model => Model.Details.Remarks, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-1 label_text">Map</div>
+            <div class="col-9" style="padding-left: 60px;">
+                
+                @Html.HiddenFor(Model => Model.Details.Location, new { @class = "form-control", @id = "geoloc" })
+                @*<input id="geoloc" type="hidden" value="" class="form-control mb-3" />*@
+                <div id="fixedMapCont" style="border: 3px solid #222;min-height: 250px; "></div>
             </div>
         </div>
         <br />
@@ -250,6 +260,20 @@
 @section scripts{
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $('#geoloc')
+            .val("11.906826,79.761381")
+            .leafletLocationPicker({
+            alwaysOpen: true,
+            height:250,
+            mapContainer: "#fixedMapCont",
+            'map': {
+                'zoom': 10
+            },
+        });
+    </script>
+    
     <script>
         function clearTakuk() {
             $("#ddlTaluk").html('');

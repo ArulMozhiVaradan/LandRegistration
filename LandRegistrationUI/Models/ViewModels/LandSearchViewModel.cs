@@ -56,5 +56,7 @@ namespace LandRegistrationUI.Models.ViewModels
         public string PreviousOwnerAddLine2 { get; set; }
         public string PreviousOwnerAddLine3 { get; set; }
         public string Remarks { get; set; }
+        public string Location { get; set; }
+        public string Email { get; set; }
     }
 }

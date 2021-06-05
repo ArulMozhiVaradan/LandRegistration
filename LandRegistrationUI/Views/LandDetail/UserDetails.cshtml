@@ -244,6 +244,14 @@
         </div>
         <br />
         <div class="row">
+            <div class="col-1 label_text">Location</div>
+            <div class="col-9" style="padding-left: 60px;">
+                <input id="geoloc5" type="hidden" value="@(Model?.Location)" size="20" />
+                <div id="fixedMapCont" style="border: 1px solid black; min-height: 250px;min-width: 200px;"></div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
             <div class="col-12">
                 <h4 class="text-center">User Images</h4>
             </div>
@@ -280,6 +288,16 @@
 
 
 @section scripts{
+    <script>
+        $('#geoloc5').leafletLocationPicker({
+            alwaysOpen: true,
+            mapContainer: "#fixedMapCont",
+            height: 250,
+            'map': {
+                'zoom': 15
+            },
+        });
+    </script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     <script>
@@ -287,11 +305,11 @@
             html2canvas(document.getElementById("content")).then(function (canvas) {
                 var margin = 5;
                 var imgData = canvas.toDataURL('image/png');
-                var imgWidth = 210 - 2*margin;
+                var imgWidth = 210 - 2 * margin;
                 var pageHeight = 295;
                 var imgHeight = canvas.height * imgWidth / canvas.width;
                 var heightLeft = imgHeight;
-                var doc =  new jsPDF('p', 'mm');
+                var doc = new jsPDF('p', 'mm');
                 var position = 10;
 
                 doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);

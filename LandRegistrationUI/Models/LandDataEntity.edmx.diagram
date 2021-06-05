@@ -16,7 +16,7 @@
         <AssociationConnector Association="LandDetailsModel.FK_RevenueVillageMaster_TalukMaster" ManuallyRouted="false" />
         <EntityTypeShape EntityType="LandDetailsModel.WardMaster" Width="1.5" PointX="7.5" PointY="6.125" />
         <AssociationConnector Association="LandDetailsModel.FK_WardMaster_RevenueVillageMaster1" />
-        <EntityTypeShape EntityType="LandDetailsModel.UsersData" Width="1.5" PointX="9.75" PointY="1.75" />
+        <EntityTypeShape EntityType="LandDetailsModel.UsersData" Width="1.5" PointX="9.75" PointY="1.5" />
         <AssociationConnector Association="LandDetailsModel.FK_UsersData_BlockMaster" />
         <AssociationConnector Association="LandDetailsModel.FK_UsersData_UsersData" />
         <AssociationConnector Association="LandDetailsModel.FK_UsersData_RevenueVillageMaster" />

@@ -166,14 +166,17 @@ namespace LandRegistrationUI.Controllers
                 RSNo = model.RSNo,
                 TSNo = model.TSNo,
                 Remarks = model.Details.Remarks,
-
+                Location = model.Details.Location,
+                Email = model.Details.Email
             };
             if (model.Ward != 0)
                 data.WardID = model.Ward;
             if (model.Block != 0)
                 data.BlockID = model.Block;
+
             var id = db.UsersDatas.Add(data);
             db.SaveChanges();
+
             List<UserImage> images = new List<UserImage>();
             foreach (HttpPostedFileBase file in model.files)
             {
@@ -193,6 +196,7 @@ namespace LandRegistrationUI.Controllers
                     images.Add(image);
                 }
             }
+
             db.UserImages.AddRange(images);
             db.SaveChanges();
             TempData[Constants.SuccessAlert] = "Updated Successfully";
@@ -222,7 +226,7 @@ namespace LandRegistrationUI.Controllers
         [HttpPost]
         public ActionResult SendMail(EmailModel model)
         {
-            Email.SendMail(model.ToMailId,model.Subject,model.Body);
+            Email.SendMail(model.ToMailId, model.Subject, model.Body);
             TempData[Constants.SuccessAlert] = "Mail Sent Successfully";
             return View();
         }
