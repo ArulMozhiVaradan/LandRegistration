@@ -1,8 +1,6 @@
 ﻿using LandRegistrationUI.BusinessLogic;
 using LandRegistrationUI.Models;
 using LandRegistrationUI.Models.ViewModels;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -224,11 +222,21 @@ namespace LandRegistrationUI.Controllers
 
 
         [HttpPost]
-        public ActionResult SendMail(EmailModel model)
+        public ActionResult SendMail(EmailModel model, HttpPostedFileBase fileUploader)
         {
-            Email.SendMail(model.ToMailId, model.Subject, model.Body);
-            TempData[Constants.SuccessAlert] = "Mail Sent Successfully";
-            return View();
+            if (ModelState.IsValid)
+            {
+                model.File = fileUploader.InputStream;
+                model.FileName = Path.GetFileName(fileUploader.FileName);
+                Email.SendMail(model);
+                TempData[Constants.SuccessAlert] = "Mail Sent Successfully";
+                return View();
+            }
+            else
+            {
+                return View(model);
+            }
+
         }
     }
 }
